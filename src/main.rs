@@ -1,11 +1,20 @@
-fn main() {
+use actix_web::{web, App, HttpServer, Responder};
 
-    let mut _name = "test";
-    let _age: i64 = 235675675656756756;
-    let _gpa = 3.23;
+async fn index() -> impl Responder {
+    "Hello world!"
+}
 
-
-    _name = "naim";
-
-    println!("Hello, world! {_name} {_age} {_gpa}");
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new().service(
+            // prefixes all resources and routes attached to it...
+            web::scope("/app")
+                // ...so this handles requests for `GET /app/index.html`
+                .route("/index.html", web::get().to(index)),
+        )
+    })
+    .bind(("127.0.0.1", 8080))?
+    .run()
+    .await
 }
