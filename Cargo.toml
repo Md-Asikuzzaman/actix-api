@@ -7,5 +7,3 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4.5.1"
-proc-macro2 = "1.0.81"
-syn = "2.0.60"
